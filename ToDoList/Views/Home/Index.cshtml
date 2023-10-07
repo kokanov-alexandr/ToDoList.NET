@@ -14,10 +14,15 @@
         <div>
             @foreach (Note note in Model)
             {
-                <p>Id: @note.Id</p>
-                <p>Заголовок: @note.Title</p>
-                <p>Клиент: @note.Client</p>
-                <br />
+                <form asp-action="IndexDelete" method="post">
+                    <p>Id: @note.Id</p>
+                    <p>Заголовок: @note.Title</p>
+                    <p>Клиент: @note.Client</p>
+                    <button type="submit">Удалить</button>
+                    @Html.Hidden("Id", note.Id)
+                    <br />
+                </form>
+               
             }
         </div>
     }

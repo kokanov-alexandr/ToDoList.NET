@@ -1,18 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System.Net.Http;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
         private readonly HttpClient _httpClient;
         private const string baseApiUrl = "https://localhost:7248/api/api/";
         public HomeController(ILogger<HomeController> logger)
         {
-            _logger = logger;
             _httpClient = new HttpClient();
         }
 
@@ -40,6 +37,22 @@ namespace ToDoList.Controllers
             await _httpClient.PostAsJsonAsync(baseApiUrl, note);
             return RedirectToAction("Index");
 
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> IndexDelete(int id)
+        {
+            var response = await _httpClient.DeleteAsync(baseApiUrl + id);
+            Console.WriteLine(baseApiUrl + id);
+            if (response.IsSuccessStatusCode)
+            {
+                Console.WriteLine("Успешно!");
+            }
+            else
+            {
+                Console.WriteLine("Ошибка!!");
+            }
+            return RedirectToAction("Index");
         }
 
 
