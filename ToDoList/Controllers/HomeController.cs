@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using Newtonsoft.Json;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers
@@ -7,26 +7,34 @@ namespace ToDoList.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
+        private readonly HttpClient _httpClient;
+        private const string baseApiUrl = "https://localhost:7248/api/api/";
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            _httpClient = new HttpClient();
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var response = await _httpClient.GetAsync(baseApiUrl);  
+
+            if (response.IsSuccessStatusCode)
+            {
+                var note = JsonConvert.DeserializeObject<List<Note>>(
+                   await response.Content.ReadAsStringAsync());
+                return View(note);
+            }
+            else
+            {
+                return StatusCode((int)response.StatusCode);
+            }
+        }
+
+        public IActionResult AddNote()
         {
             return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

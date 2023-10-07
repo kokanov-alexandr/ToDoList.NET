@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ToDoList.Models;
 
-namespace ToDoList.Controllers
+namespace ToDoList.Api
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -25,7 +25,7 @@ namespace ToDoList.Controllers
         public async Task<IActionResult> Get([FromRoute] int id)
         {
             var note = await dbContext.Notes.FindAsync(id);
-            
+
             if (note == null)
             {
                 return NotFound();
