@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System.Net.Http;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers
@@ -32,6 +33,17 @@ namespace ToDoList.Controllers
             }
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> Index(Note note)
+        {
+            await _httpClient.PostAsJsonAsync(baseApiUrl, note);
+            return RedirectToAction("Index");
+
+        }
+
+
+        [HttpGet]
         public IActionResult AddNote()
         {
             return View();

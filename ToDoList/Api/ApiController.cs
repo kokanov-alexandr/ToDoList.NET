@@ -58,5 +58,14 @@ namespace ToDoList.Api
             return Ok();
 
         }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAll()
+        {
+
+            dbContext.RemoveRange(dbContext.Notes);
+            await dbContext.SaveChangesAsync();
+            return Ok();
+        }
     }
 }

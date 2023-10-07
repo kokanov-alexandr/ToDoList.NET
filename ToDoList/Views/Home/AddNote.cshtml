@@ -1,4 +1,21 @@
-﻿@{
+﻿@model Note;
+@{
     ViewData["Title"] = "Добавление заказа";
 }
 <h1>@ViewData["Title"]</h1>
+
+<form asp-action="Index" method="post">
+    <p>
+        <label asp-for="Title">
+            Введите заголовок
+        </label>
+        <input asp-for="Title"/>
+    </p>
+    <p>
+        <label asp-for="Client">
+            Введите заказчика
+        </label>
+        <input asp-for="Client" />
+    </p>
+    <button type="submit">Создать заказ</button>
+</form>
