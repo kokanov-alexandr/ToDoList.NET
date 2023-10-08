@@ -20,8 +20,7 @@ namespace ToDoList.Controllers
 
             if (response.IsSuccessStatusCode)
             {
-                var note = JsonConvert.DeserializeObject<List<Note>>(
-                   await response.Content.ReadAsStringAsync());
+                var note = JsonConvert.DeserializeObject<List<Note>>(await response.Content.ReadAsStringAsync());
                 return View(note);
             }
             else
@@ -32,7 +31,7 @@ namespace ToDoList.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Index(Note note)
+        public async Task<IActionResult> AddNote(Note note)
         {
             await _httpClient.PostAsJsonAsync(baseApiUrl, note);
             return RedirectToAction("Index");
@@ -40,18 +39,9 @@ namespace ToDoList.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> IndexDelete(int id)
+        public async Task<IActionResult> DeleteNote(int id)
         {
             var response = await _httpClient.DeleteAsync(baseApiUrl + id);
-            Console.WriteLine(baseApiUrl + id);
-            if (response.IsSuccessStatusCode)
-            {
-                Console.WriteLine("Успешно!");
-            }
-            else
-            {
-                Console.WriteLine("Ошибка!!");
-            }
             return RedirectToAction("Index");
         }
 
