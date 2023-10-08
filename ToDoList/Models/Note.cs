@@ -5,11 +5,11 @@ namespace ToDoList.Models
     public class Note
     {
         public int Id { get; set; }
-        [Required(ErrorMessage = "Не указано имя")]
-        [MaxLength(100)]
+        [Required(ErrorMessage = "Введите заголовок")]
         public string Title { get; set; }
-        [Required]
-        [MaxLength(100)]
+        [Required(ErrorMessage = "Введите клиента")]
         public string Client { get; set; }
     }
+
 }
+

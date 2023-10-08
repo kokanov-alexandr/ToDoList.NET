@@ -60,7 +60,7 @@ namespace ToDoList.Api
         }
 
         [HttpDelete]
-        public async Task<IActionResult> DeleteAll()
+        public async Task<IActionResult> Delete()
         {
 
             dbContext.RemoveRange(dbContext.Notes);

@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using System.Reflection;
 using ToDoList.Models;
 
 namespace ToDoList.Controllers
@@ -33,8 +36,20 @@ namespace ToDoList.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNote(Note note)
         {
-            await _httpClient.PostAsJsonAsync(baseApiUrl, note);
-            return RedirectToAction("Index");
+            if (note.Title.IsNullOrEmpty())
+            {
+                return View(note);
+            }
+            if (note.Client.IsNullOrEmpty())
+            {
+                return View(note);
+            }
+            else
+            {
+                await _httpClient.PostAsJsonAsync(baseApiUrl, note);
+                return RedirectToAction("Index");
+            }
+          
 
         }
 
