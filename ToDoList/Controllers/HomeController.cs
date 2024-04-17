@@ -49,8 +49,6 @@ namespace ToDoList.Controllers
                 await _httpClient.PostAsJsonAsync(baseApiUrl, note);
                 return RedirectToAction("Index");
             }
-          
-
         }
 
         [HttpPost]

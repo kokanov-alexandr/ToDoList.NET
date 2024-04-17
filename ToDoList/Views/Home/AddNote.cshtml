@@ -4,23 +4,22 @@
 }
 <h1>@ViewData["Title"]</h1>
 
-
 <form asp-action="AddNote" method="post">
     <div class="mb-3">
         <label asp-for="Title" for="exampleInputEmail1" class="form-label">
             Заголовок
         </label>
         <input asp-for="Title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        @Html.ValidationMessageFor(model => model.Title)
+        @Html.ValidationMessageFor(model => model.Title, "",  new { @class = "text-danger" })
     </div>
     <div class="mb-3">
         <label asp-for="Client" for="exampleInputPassword1" class="form-label">
             Клиент
             </label>
         <input asp-for="Client" class="form-control" id="exampleInputPassword1">
-            @Html.ValidationMessageFor(model => model.Client)
+        @Html.ValidationMessageFor(model => model.Client, "", new { @class = "text-danger" })
     </div>
     <button type="submit" class="btn btn-primary">
-        Создать заказ
+        Создать заказ   
     </button>
 </form>
