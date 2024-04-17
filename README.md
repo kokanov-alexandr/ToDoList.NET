@@ -5,5 +5,5 @@
 1. Удаление заказа
 1. Просмотр всех заказов
 
-![example1](ToDoList/images/example1.png)
+![example1](ToDoList/images/example2.png)
 ![example2](ToDoList/images/example1.png)
